@@ -12,7 +12,7 @@ import { Formik } from "formik";
 import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-// import { setLogin } from "state"; // Adjust import path as needed
+import { setLogin } from "../../state"; // Adjust import path as needed
 import Dropzone from "react-dropzone";
 
 // Validation schemas
@@ -59,7 +59,6 @@ const Form = () => {
     const formData = new FormData();
     Object.keys(values).forEach((key) => formData.append(key, values[key]));
     if (values.picture) formData.append("picturePath", values.picture.name);
-
     try {
       const response = await fetch("http://localhost:3001/auth/register", {
         method: "POST",
@@ -93,7 +92,7 @@ const Form = () => {
             token: result.token,
           })
         );
-        navigate("/");
+        navigate("/home");
       } else {
         console.log("Login failed, token not found in response:", result);
       }
